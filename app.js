@@ -3,9 +3,19 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/usersRouter');
+
+const Users = require('./models/users');
+
+const url = 'mongodb://localhost:27017/crud';
+const connect = mongoose.connect(url);
+
+connect.then((db) => {
+  console.log("Connected correctly to Server");
+}, (err) => { console.log(err)});
 
 var app = express();
 

@@ -1,25 +1,44 @@
 var express = require('express');
 var usersRouter = express.Router();
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+4
+const Users = require('../models/users');
 
 usersRouter.use(bodyParser.json());
 
 usersRouter.route('/')
-.get(function(req, res) {
-  res.statusCode = 200;
-  res.send('Getting Users');
+.get((req, res, next) => {
+  Users.find({})
+  .then((users) => {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(users);
+  }, (err) => next(err))
+  .catch((err) => next(err));
 })
-.post(function(req, res) {
-  res.statusCode = 200;
-  res.send('Posting Users');
+.post(function(req, res, next) {
+  Users.create(req.body)
+  .then((user) => {
+    console.log("User created ",user);
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(user);
+  }, (err) => next(err))
+  .catch((err) => next(err));
 })
 .put(function(req, res) {
   res.statusCode = 200;
-  res.send('Updating Users');
+  res.send('Not Supported');
 })
-.delete(function(req, res) {
-  res.statusCode = 200;
-  res.send('Deleting Users');
-})
+.delete(function(req, res, next) {
+  Users.remove({})
+  .then((resp) => {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(resp);
+  }, (err) => next(err))
+  .catch((err) => next(err));
+});
 
 module.exports = usersRouter;
