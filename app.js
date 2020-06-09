@@ -11,7 +11,7 @@ var usersRouter = require('./routes/usersRouter');
 const Users = require('./models/users');
 
 const url = 'mongodb://localhost:27017/crud';
-const connect = mongoose.connect(url);
+const connect = mongoose.connect(url, {useNewUrlParser: true});
 
 connect.then((db) => {
   console.log("Connected correctly to Server");
