@@ -9,7 +9,7 @@ usersRouter.use(bodyParser.json());
 
 usersRouter.route('/')
 .get((req, res, next) => {
-  Users.find({})
+  Users.find(req.query)
   .then((users) => {
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
