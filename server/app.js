@@ -4,12 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-const hbs = require('hbs');
+const exphbs = require('express-handlebars');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/usersRouter');
-
-const Users = require('./models/users');
 
 const url = 'mongodb://localhost:27017/crud';
 const connect = mongoose.connect(url, {useNewUrlParser: true});
@@ -21,8 +19,8 @@ connect.then((db) => {
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -46,7 +44,6 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
 });
 
 module.exports = app;

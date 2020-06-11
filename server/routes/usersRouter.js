@@ -2,7 +2,6 @@ var express = require('express');
 var usersRouter = express.Router();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-4
 const Users = require('../models/users');
 
 usersRouter.use(bodyParser.json());
