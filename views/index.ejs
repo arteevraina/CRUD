@@ -66,6 +66,11 @@
               type="text"
               name="contact"
             />
+            <input
+              class="bg-white rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4"
+              type="file"
+              id="fileupload"
+            />
             <br />
             <button
               class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
@@ -128,4 +133,38 @@
       </div>
     </section>
   </body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-storage.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyDmPur2scQniR3NJ3SwybCm3RtWiH0TNEA",
+      authDomain: "crud-22077.firebaseapp.com",
+      databaseURL: "https://crud-22077.firebaseio.com",
+      projectId: "crud-22077",
+      storageBucket: "crud-22077.appspot.com",
+      messagingSenderId: "626926455957",
+      appId: "1:626926455957:web:26ff2ebd6c90ae4a115f9c",
+      measurementId: "G-WZF7ZQ048P",
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    //console.log(firebase);
+
+    var fileButton = document.getElementById("fileupload");
+
+    fileButton.addEventListener("change", function (e) {
+      //Get File
+      var file = e.target.files[0];
+      //Create a Storage ref
+      var storageRef = firebase.storage().ref(file.name);
+      //Upload file
+      storageRef.put(file);
+    });
+  </script>
 </html>
