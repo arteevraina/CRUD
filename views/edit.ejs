@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD APP</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="w-full max-w-xs">
+      <form
+        action="/update"
+        method="POST"
+        class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      >
+        <input type="hidden" name="id" value="<%= Users._id %>" />
+        <label class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="text"
+          placeholder="name"
+          name="name"
+          value="<%= Users.name %>"
+        />
+        <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="text"
+          placeholder="email"
+          name="email"
+          value="<%= Users.email %>"
+        />
+        <label class="block text-gray-700 text-sm font-bold mb-2"
+          >Contact</label
+        >
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="text"
+          placeholder="contact"
+          name="contact"
+          value="<%= Users.contact %>"
+        />
+
+        <button
+          type="submit"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

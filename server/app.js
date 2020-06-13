@@ -6,7 +6,6 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/usersRouter');
 
 const url = 'mongodb://localhost:27017/crud';
@@ -28,7 +27,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

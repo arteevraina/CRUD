@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD APP</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <header class="text-gray-700 body-font">
+      <div
+        class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+      >
+        <a
+          class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+            ></path>
+          </svg>
+          <span class="ml-3 text-xl">tailblocks</span>
+        </a>
+        <nav
+          class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center"
+        >
+          <a class="mr-5 hover:text-gray-900">First Link</a>
+          <a class="mr-5 hover:text-gray-900">Second Link</a>
+          <a class="mr-5 hover:text-gray-900">Third Link</a>
+          <a class="mr-5 hover:text-gray-900">Fourth Link</a>
+        </nav>
+        <button
+          class="inline-flex items-center bg-gray-200 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0"
+        >
+          Button
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="w-4 h-4 ml-1"
+            viewBox="0 0 24 24"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+    <br />
+    <br />
+    <section class="text-gray-700 body-font relative">
+      <div class="container px-5 mx-auto flex sm:flex-no-wrap flex-wrap">
+        <img
+          class="lg:w-2/3 md:w-1/2 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative"
+          src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+          width="100%"
+          height="100%"
+        />
+        <div
+          class="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0"
+        >
+          <form action="/" method="POST">
+            <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">
+              User Form
+            </h2>
+            <p class="leading-relaxed mb-5 text-gray-600">
+              Enter User Details
+            </p>
+            <input
+              class="bg-white rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4"
+              placeholder="Name"
+              type="text"
+              name="name"
+            />
+            <input
+              class="bg-white rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4"
+              placeholder="Email"
+              type="text"
+              name="email"
+            />
+            <input
+              class="bg-white rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4"
+              placeholder="Contact"
+              type="text"
+              name="contact"
+            />
+            <br />
+            <button
+              class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section class="text-gray-700 body-font">
+      <div class="container px-5 mx-auto">
+        <div class="flex flex-col text-center w-full mb-20"></div>
+        <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+          <table class="table-auto w-full text-left whitespace-no-wrap">
+            <thead>
+              <tr>
+                <th
+                  class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200 rounded-tl rounded-bl"
+                >
+                  Name
+                </th>
+                <th
+                  class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200"
+                >
+                  Email
+                </th>
+                <th
+                  class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-200"
+                >
+                  Contact
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i = 0; i < Users.length; i++) {%>
+              <tr>
+                <td class="px-4 py-3"><%= Users[i].name %></td>
+                <td class="px-4 py-3"><%= Users[i].email %></td>
+                <td class="px-4 py-3"><%= Users[i].contact %></td>
+                <td class="px-4 py-3">
+                  <a
+                    href="/delete/<%= Users[i]._id %>"
+                    class="fa fa-trash"
+                    style="font-size: 24px; color: red;"
+                  ></a>
+                </td>
+                <td class="py-3">
+                  <a
+                    href="/edit/<%= Users[i]._id %>"
+                    class="fa fa-pencil"
+                    style="font-size: 24px; color: green;"
+                  ></a>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

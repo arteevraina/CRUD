@@ -7,14 +7,8 @@ const Users = require('../models/users');
 usersRouter.use(bodyParser.json());
 
 usersRouter.route('/')
-.get((req, res, next) => {
-  Users.find(req.query)
-  .then((users) => {
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.json(users);
-  }, (err) => next(err))
-  .catch((err) => next(err));
+.get((req, res) => {
+  res.render("home");
 })
 .post(function(req, res, next) {
   Users.create(req.body)
@@ -22,7 +16,6 @@ usersRouter.route('/')
     console.log("User created ",user);
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
-    res.json(user);
   }, (err) => next(err))
   .catch((err) => next(err));
 })
