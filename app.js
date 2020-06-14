@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Users = require("./models/Users");
 const app = express();
 
-const portNumber = 3000;
+const portNumber = process.env.PORT || 3000;
 const url = "mongodb://127.0.0.1:27017/crud";
 const connect = mongoose.connect(url, { useNewUrlParser: true });
 connect.then(
