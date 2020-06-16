@@ -6,7 +6,11 @@ const app = express();
 
 const portNumber = process.env.PORT || 3000;
 const url = "mongodb://127.0.0.1:27017/crud";
-const connect = mongoose.connect(url, { useNewUrlParser: true });
+
+const connect = mongoose.connect(process.env.MONGODB_URI || url, {
+  useNewUrlParser: true,
+});
+
 connect.then(
   (db) => {
     console.log("Connected correctly to Server");
