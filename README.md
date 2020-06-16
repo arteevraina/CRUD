@@ -38,6 +38,7 @@ $ npm start
 * Express
 * Node
 * MongoDB
+* Firebase
 * Tailwind CSS
 
 
