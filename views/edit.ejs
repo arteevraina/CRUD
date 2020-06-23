@@ -28,16 +28,18 @@
           placeholder="name"
           name="name"
           value="<%= Users.name %>"
+          required
         />
         <br />
         <br />
         <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
         <input
           class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
+          type="email"
           placeholder="email"
           name="email"
           value="<%= Users.email %>"
+          required
         />
         <br />
         <br />
@@ -46,10 +48,12 @@
         >
         <input
           class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
+          type="tel"
+          pattern="[0-9]{10}"
           placeholder="contact"
           name="contact"
           value="<%= Users.contact %>"
+          required
         />
         <br />
         <br />
