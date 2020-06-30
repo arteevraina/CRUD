@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   Users.find({}).exec((err, users) => {
     if (err) throw err;
-    res.render("index.ejs", { Users: users });
+    res.render("index.ejs");
   });
 });
 
