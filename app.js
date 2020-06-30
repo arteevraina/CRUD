@@ -37,6 +37,13 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/users", (req, res) => {
+  Users.find({}).exec((err, users) => {
+    if (err) throw err;
+    res.render("users.ejs", { Users: users });
+  });
+});
+
 app.post("/", (req, res, next) => {
   var userDetails = new Users({
     name: req.body.name,
