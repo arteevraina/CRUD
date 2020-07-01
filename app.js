@@ -54,7 +54,8 @@ app.post("/", (req, res, next) => {
   userDetails.save((err, resp) => {
     Users.find({}).exec((err, users) => {
       if (err) throw err;
-      res.render("users.ejs", { Users: users });
+      // res.redirect("/users");
+      res.render("index.ejs");
     });
   });
 });
