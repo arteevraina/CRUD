@@ -132,10 +132,22 @@
     fileButton.addEventListener("change", function (e) {
       //Get File
       var file = e.target.files[0];
+      console.log(file.name);
       //Create a Storage ref
       var storageRef = firebase.storage().ref(file.name);
       //Upload file
       storageRef.put(file);
+      console.log("Success");
+
+      storageRef
+        .getDownloadURL()
+        .then(function (url) {
+          console.log(url);
+        })
+        .catch(function (error) {
+          console.log("Error");
+        });
+      console.log("Downloaded");
     });
   </script>
   <script
