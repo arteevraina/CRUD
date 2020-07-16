@@ -81,9 +81,11 @@
               type="file"
               id="fileupload"
             />
+            <input type="hidden" name="avatarUrl" id="url" />
             <br />
             <button
               class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              id="submit"
             >
               Submit
             </button>
@@ -130,24 +132,37 @@
     var fileButton = document.getElementById("fileupload");
 
     fileButton.addEventListener("change", function (e) {
-      //Get File
+      // Get File
       var file = e.target.files[0];
       console.log(file.name);
-      //Create a Storage ref
+      // Create a Storage ref
       var storageRef = firebase.storage().ref(file.name);
       //Upload file
-      storageRef.put(file);
-      console.log("Success");
+      var task = storageRef.put(file);
 
-      storageRef
-        .getDownloadURL()
-        .then(function (url) {
-          console.log(url);
-        })
-        .catch(function (error) {
-          console.log("Error");
-        });
-      console.log("Downloaded");
+      task.on(
+        "state_changed",
+        function progress(snapshot) {
+          console.log("Progress in  Upload");
+        },
+        function error(err) {
+          console.log("Error in Upload");
+        },
+        function complete() {
+          // DownloadURL
+          storageRef
+            .getDownloadURL()
+            .then(function (url) {
+              console.log(url);
+              var input = document.getElementById("url");
+              input.name = url;
+            })
+            .catch(function (error) {
+              console.log("Error in Download");
+            });
+          console.log("Downloaded");
+        }
+      );
     });
   </script>
   <script

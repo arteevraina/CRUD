@@ -49,8 +49,9 @@ app.post("/", (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     contact: req.body.contact,
+    avatarUrl: req.body.avatarUrl,
   });
-  //console.log(userDetails);
+  console.log(userDetails);
   userDetails.save((err, resp) => {
     Users.find({}).exec((err, users) => {
       if (err) throw err;
