@@ -21,6 +21,7 @@ const usersSchema = new Schema(
     },
     avatarUrl: {
       type: String,
+      required: true,
     },
   },
   {

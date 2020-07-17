@@ -80,6 +80,7 @@
               class="bg-white rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4"
               type="file"
               id="fileupload"
+              name="avatarUrl"
             />
             <input type="hidden" name="avatarUrl" id="url" />
             <br />
@@ -154,9 +155,8 @@
             .getDownloadURL()
             .then(function (url) {
               console.log(url);
-              var input = document.getElementById("url");
-              input.name = url;
-              console.log(input.name);
+              var inputField = document.getElementById("url");
+              console.log(inputField.value);
             })
             .catch(function (error) {
               console.log("Error in Download");
