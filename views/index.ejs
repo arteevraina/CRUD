@@ -81,6 +81,9 @@
               type="file"
               id="fileupload"
             />
+            <br />
+            <progress value="0" max="100" id="uploader">0%</progress>
+            <br />
             <input type="hidden" name="avatarUrl" id="url" value="" />
             <br />
             <button
@@ -132,6 +135,7 @@ Instead of passing a path to the resource you want to request into the fetch() c
     //console.log(firebase);
 
     var fileButton = document.getElementById("fileupload");
+    var uploader = document.getElementById("uploader");
 
     fileButton.addEventListener("change", function (e) {
       // Get File
@@ -146,6 +150,9 @@ Instead of passing a path to the resource you want to request into the fetch() c
         "state_changed",
         function progress(snapshot) {
           // console.log("Progress in  Upload");
+          var percentage =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          uploader.value = percentage;
         },
         function error(err) {
           // console.log("Error in Upload");
