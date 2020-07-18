@@ -80,9 +80,8 @@
               class="bg-white rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2 mb-4"
               type="file"
               id="fileupload"
-              name="avatarUrl"
             />
-            <input type="hidden" name="avatarUrl" id="url" />
+            <input type="hidden" name="avatarUrl" id="url" value="" />
             <br />
             <button
               class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
@@ -111,7 +110,9 @@
   <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-storage.js"></script>
   <!-- TODO: Add SDKs for Firebase products that you want to use
-   https://firebase.google.com/docs/web/setup#available-libraries -->
+   https://firebase.googl
+
+Instead of passing a path to the resource you want to request into the fetch() call, you can create a request object using the Request() constructor, and pass that in as a fetch() method argument:e.com/docs/web/setup#available-libraries -->
   <script src="https://www.gstatic.com/firebasejs/7.15.1/firebase-analytics.js"></script>
 
   <script>
@@ -135,7 +136,7 @@
     fileButton.addEventListener("change", function (e) {
       // Get File
       var file = e.target.files[0];
-      console.log(file.name);
+      // console.log(file.name);
       // Create a Storage ref
       var storageRef = firebase.storage().ref(file.name);
       //Upload file
@@ -144,24 +145,25 @@
       task.on(
         "state_changed",
         function progress(snapshot) {
-          console.log("Progress in  Upload");
+          // console.log("Progress in  Upload");
         },
         function error(err) {
-          console.log("Error in Upload");
+          // console.log("Error in Upload");
         },
         function complete() {
           // DownloadURL
           storageRef
             .getDownloadURL()
             .then(function (url) {
-              console.log(url);
-              var inputField = document.getElementById("url");
-              console.log(inputField.value);
+              var input = document.getElementById("url");
+              // console.log(input.value);
+              input.value = url;
+              // console.log(input.value);
             })
             .catch(function (error) {
-              console.log("Error in Download");
+              // console.log("Error in Download");
             });
-          console.log("Downloaded");
+          // console.log("Downloaded");
         }
       );
     });
