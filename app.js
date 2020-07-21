@@ -5,8 +5,7 @@ const app = express();
 const usersRoutes = require("./routes/usersRoutes");
 
 const portNumber = process.env.PORT || 3000;
-const url =
-  "mongodb+srv://admin:admin@cluster0-ree5g.mongodb.net/crud?retryWrites=true&w=majority";
+const url = process.env.URL_MONGO_DB;
 
 const connect = mongoose.connect(url, {
   useNewUrlParser: true,
