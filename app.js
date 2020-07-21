@@ -1,23 +1,25 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const Users = require("./models/Users");
 const app = express();
+const usersRoutes = require("./routes/usersRoutes");
+require("dotenv").config();
 
 const portNumber = process.env.PORT || 3000;
-const url =
-  "mongodb+srv://admin:admin@cluster0-ree5g.mongodb.net/crud?retryWrites=true&w=majority";
+const url = process.env.URL_MONGO_DB;
 
 const connect = mongoose.connect(url, {
   useNewUrlParser: true,
 });
 
-connect.then(
-  (db) => {
-    console.log("Connected correctly to Server");
-  },
-  (err) => console.log(err)
-);
+connect
+  .then(
+    () => {
+      console.log("Connected correctly to Server");
+    },
+    (err) => console.log(err)
+  )
+  .catch((err) => next(err));
 
 app.use(express.static("public"));
 
@@ -30,66 +32,15 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  Users.find({}).exec((err, users) => {
-    if (err) throw err;
-    res.render("index.ejs");
-  });
+//  Mounting Routes
+app.use("/", usersRoutes);
+
+app.use((req, res, next) => {
+  const err = new Error("Not Found");
+  res.statusCode = 404;
+  next(err);
 });
 
-app.get("/users", (req, res) => {
-  Users.find({}).exec((err, users) => {
-    if (err) throw err;
-    res.render("users.ejs", { Users: users });
-  });
-});
-
-app.post("/", (req, res, next) => {
-  // console.log(req.body.avatarUrl);
-  var userDetails = new Users({
-    name: req.body.name,
-    email: req.body.email,
-    contact: req.body.contact,
-    avatarUrl: req.body.avatarUrl,
-  });
-  // console.log(userDetails);
-  userDetails.save((err, resp) => {
-    Users.find({}).exec((err, users) => {
-      if (err) throw err;
-      // res.redirect("/users");
-      res.render("index.ejs");
-    });
-  });
-});
-
-app.get("/delete/:id", (req, res, next) => {
-  var id = req.params.id;
-  var del = Users.findByIdAndDelete(id);
-  del.exec((err) => {
-    if (err) throw err;
-    res.redirect("/");
-  });
-});
-
-app.get("/edit/:id", (req, res, next) => {
-  var id = req.params.id;
-  var edit = Users.findById(id);
-  edit.exec((err, users) => {
-    if (err) throw err;
-    res.render("edit", { Users: users });
-  });
-});
-
-app.post("/update/", (req, res, next) => {
-  var update = Users.findByIdAndUpdate(req.body.id, {
-    name: req.body.name,
-    email: req.body.email,
-    contact: req.body.contact,
-  });
-
-  console.log(update);
-  update.exec((err, users) => {
-    if (err) throw err;
-    res.redirect("/");
-  });
+app.use((err, req, res, next) => {
+  res.send("Not Found " + res.statusCode);
 });
