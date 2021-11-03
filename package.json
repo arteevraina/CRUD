@@ -25,7 +25,7 @@
     "mongoose": "^5.9.18",
     "morgan": "^1.10.0",
     "prettier": "^2.0.5",
-    "validator": "^13.1.1"
+    "validator": "^13.7.0"
   },
   "prettier": {
     "config": true
